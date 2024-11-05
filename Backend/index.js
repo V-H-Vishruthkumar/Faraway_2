@@ -62,7 +62,7 @@ app.put("/addItems", async (req, res) => {
   }
 });
 
-app.get("/findTrip/:tripId", async (req, res) => {
+app.get("/findtrip/:tripId", async (req, res) => {
   await connectToDatabase();
   try {
     const getTrip = await Trip.findOne({ id: req.params.tripId });
