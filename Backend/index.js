@@ -7,7 +7,26 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.listen(5000);
+let isConnected; // Track connection status
+
+async function connectToDatabase() {
+  if (isConnected) return;
+
+  try {
+    const db = await mongoose.connect(
+      "mongodb+srv://VHVK:vhvk@cluster0.ocdzo.mongodb.net/faraway?retryWrites=true&w=majority&appName=Cluster0",
+      { useNewUrlParser: true, useUnifiedTopology: true }
+    );
+    isConnected = db.connections[0].readyState; // Store connection status
+    console.log("Connected to MongoDB");
+  } catch (error) {
+    console.error("MongoDB connection error:", error.message);
+  }
+}
+
 app.post("/newTrip", async (req, res) => {
+  await connectToDatabase();
   try {
     const trip = new Trip({
       name: req.body.tripName,
@@ -27,6 +46,7 @@ app.post("/newTrip", async (req, res) => {
 });
 
 app.put("/addItems", async (req, res) => {
+  await connectToDatabase();
   try {
     const trip = await Trip.findOne({ id: req.body.tripId });
 
@@ -43,6 +63,7 @@ app.put("/addItems", async (req, res) => {
 });
 
 app.get("/findTrip/:tripId", async (req, res) => {
+  await connectToDatabase();
   try {
     const getTrip = await Trip.findOne({ id: req.params.tripId });
     if (!getTrip) {
@@ -54,7 +75,7 @@ app.get("/findTrip/:tripId", async (req, res) => {
   }
 });
 
-app.listen(5000);
+/*app.listen(5000);
 mongoose
   .connect(
     "mongodb+srv://VHVK:vhvk@cluster0.ocdzo.mongodb.net/faraway?retryWrites=true&w=majority&appName=Cluster0"
@@ -65,3 +86,4 @@ mongoose
   .catch((err) => {
     console.log(err.message);
   });
+*/
