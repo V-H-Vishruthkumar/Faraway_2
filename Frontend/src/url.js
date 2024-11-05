@@ -1,1 +1,1 @@
-export const backendUrl = "https://faraway-2-backend.vercel.app";
+export const backendUrl = "https://faraway-2-b1bu.vercel.app/";
