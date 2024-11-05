@@ -9,7 +9,7 @@ export function Existing() {
   const navigate = useNavigate();
   async function findTrip(e) {
     e.preventDefault();
-    const response = await fetch(`${backendUrl}/findTrip` + tripId);
+    const response = await fetch(`${backendUrl}/findTrip/` + tripId);
     const resData = await response.json();
     navigate(`/components/main/${resData.tripId}`);
     if (!response.ok) {
