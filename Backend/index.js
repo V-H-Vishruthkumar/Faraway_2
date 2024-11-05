@@ -6,26 +6,8 @@ const cors = require("cors");
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.listen(5000);
-let isConnected; // Track connection status
-
-async function connectToDatabase() {
-  if (isConnected) return;
-
-  try {
-    const db = await mongoose.connect(
-      "mongodb+srv://VHVK:vhvk@cluster0.ocdzo.mongodb.net/faraway?retryWrites=true&w=majority&appName=Cluster0",
-      { useNewUrlParser: true, useUnifiedTopology: true }
-    );
-    isConnected = db.connections[0].readyState; // Store connection status
-    console.log("Connected to MongoDB");
-  } catch (error) {
-    console.error("MongoDB connection error:", error.message);
-  }
-}
 
 app.post("/newTrip", async (req, res) => {
-  await connectToDatabase();
   try {
     const trip = new Trip({
       name: req.body.tripName,
@@ -45,7 +27,6 @@ app.post("/newTrip", async (req, res) => {
 });
 
 app.put("/addItems", async (req, res) => {
-  await connectToDatabase();
   try {
     const trip = await Trip.findOne({ id: req.body.tripId });
 
@@ -61,8 +42,7 @@ app.put("/addItems", async (req, res) => {
   }
 });
 
-app.get("/findtrip/:tripId", async (req, res) => {
-  await connectToDatabase();
+app.get("/findTrip/:tripId", async (req, res) => {
   try {
     const getTrip = await Trip.findOne({ id: req.params.tripId });
     if (!getTrip) {
@@ -73,3 +53,15 @@ app.get("/findtrip/:tripId", async (req, res) => {
     res.status(500).json({ message: "Error retriving trip", err });
   }
 });
+
+app.listen(5000);
+mongoose
+  .connect(
+    "mongodb+srv://VHVK:vhvk@cluster0.ocdzo.mongodb.net/faraway?retryWrites=true&w=majority&appName=Cluster0"
+  )
+  .then(() => {
+    console.log("conneted");
+  })
+  .catch((err) => {
+    console.log(err.message);
+  });
