@@ -46,7 +46,7 @@ export function PackingList({
     }
   }
   async function findTrip() {
-    const response = await fetch(`${backendUrl}/findTrip` + tripId);
+    const response = await fetch(`${backendUrl}/findTrip/` + tripId);
     const resData = await response.json();
     setItems(resData.items);
     getTripName(resData.name);
