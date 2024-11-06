@@ -173,3 +173,150 @@ input[type="checkbox"] {
   margin: 20px auto;
   display: block;
 }
+
+/* Media */
+
+@media (max-width: 600px) {
+  body {
+    font-size: 2rem; /* Smaller font size for mobile */
+  }
+
+  .app {
+    grid-template-rows: auto auto 1fr;
+  }
+
+  h1 {
+    font-size: 5rem;
+    word-spacing: 20px;
+    letter-spacing: -3px;
+    padding: 1.2rem 0;
+  }
+
+  .add-form {
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .add-form button,
+  .add-form input,
+  .add-form select {
+    width: 100%;
+    font-size: 1.6rem;
+  }
+
+  .list ul {
+    grid-template-columns: 1fr; /* One column for mobile */
+  }
+
+  .stats {
+    font-size: 2rem;
+  }
+
+  .logincon {
+    padding-top: 4rem;
+  }
+
+  .loginbtn {
+    flex-direction: column;
+  }
+
+  .loader {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/* Medium Devices (Tablets) */
+@media (min-width: 601px) and (max-width: 1024px) {
+  body {
+    font-size: 2.2rem; /* Slightly larger font size for tablets */
+  }
+
+  h1 {
+    font-size: 6rem;
+    word-spacing: 25px;
+    letter-spacing: -4px;
+    padding: 2rem 0;
+  }
+
+  .add-form {
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  .add-form button,
+  .add-form input,
+  .add-form select {
+    font-size: 1.7rem;
+  }
+
+  .list ul {
+    grid-template-columns: repeat(2, 1fr); /* Two columns for tablets */
+  }
+
+  .stats {
+    font-size: 2.4rem;
+  }
+
+  .logincon {
+    padding-top: 6rem;
+  }
+
+  .loginbtn {
+    gap: 2rem;
+  }
+
+  .loader {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Large Devices (Desktops) */
+@media (min-width: 1025px) {
+  body {
+    font-size: 2.4rem; /* Default font size for desktops */
+  }
+
+  h1 {
+    font-size: 8rem;
+    word-spacing: 30px;
+    letter-spacing: -5px;
+    padding: 2.4rem 0;
+  }
+
+  .add-form {
+    flex-direction: row;
+    gap: 0.8rem;
+  }
+
+  .add-form button,
+  .add-form input,
+  .add-form select {
+    font-size: 1.8rem;
+  }
+
+  .list ul {
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(250px, 1fr)
+    ); /* Multiple columns */
+  }
+
+  .stats {
+    font-size: 2.8rem;
+  }
+
+  .logincon {
+    padding-top: 8rem;
+  }
+
+  .loginbtn {
+    gap: 1.5rem;
+  }
+
+  .loader {
+    width: 50px;
+    height: 50px;
+  }
+}
