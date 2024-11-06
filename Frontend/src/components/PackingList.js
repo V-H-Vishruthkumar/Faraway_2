@@ -40,7 +40,6 @@ export function PackingList({
     });
 
     const resData = await response.json();
-    console.log(resData);
     if (!response.ok) {
       alert(resData.message);
     }
