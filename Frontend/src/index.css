@@ -45,6 +45,11 @@ h1 {
   padding: 2.4rem 0;
 }
 
+a {
+  text-decoration: none; /* Ensure the link has no underline */
+  color: inherit; /* Inherit color from parent */
+}
+
 .add-form {
   background-color: #e5771f;
   padding: 2.8rem 0;

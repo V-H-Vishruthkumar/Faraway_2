@@ -1,3 +1,10 @@
+import { Link } from "react-router-dom";
 export function Header() {
-  return <h1>🏖️Far Away👜</h1>;
+  return (
+    <div>
+      <Link to={"/"} className="Home">
+        <h1>✈️ Faraway</h1>
+      </Link>
+    </div>
+  );
 }
