@@ -17,6 +17,7 @@ export function Existing() {
       navigate(`/components/main/${resData.tripId}`);
       if (!response.ok) {
         alert(resData.message);
+        navigate("/");
       }
     } catch (error) {
       alert(error);
