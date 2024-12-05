@@ -6,18 +6,20 @@ const cors = require("cors");
 const app = express();
 app.use(cors());
 app.use(express.json());
-
+require("dotenv").config();
 app.listen(5000);
 let isConnected; // Track connection status
+
+DBLINK = process.env.DB_URL;
 
 async function connectToDatabase() {
   if (isConnected) return;
 
   try {
-    const db = await mongoose.connect(
-      "mongodb+srv://VHVK:vhvk@cluster0.ocdzo.mongodb.net/faraway?retryWrites=true&w=majority&appName=Cluster0",
-      { useNewUrlParser: true, useUnifiedTopology: true }
-    );
+    const db = await mongoose.connect(DBLINK, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
     isConnected = db.connections[0].readyState; // Store connection status
     console.log("Connected to MongoDB");
   } catch (error) {
@@ -78,7 +80,7 @@ app.get("/findtrip/:tripId", async (req, res) => {
 /*app.listen(5000);
 mongoose
   .connect(
-    "mongodb+srv://VHVK:vhvk@cluster0.ocdzo.mongodb.net/faraway?retryWrites=true&w=majority&appName=Cluster0"
+   ""
   )
   .then(() => {
     console.log("conneted");
